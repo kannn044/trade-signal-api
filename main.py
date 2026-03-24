@@ -1,4 +1,5 @@
 import os
+from typing import Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -24,22 +25,22 @@ VLLM_MODEL = os.getenv("VLLM_MODEL", "mastermind-coder")
 class AnalysisRequest(BaseModel):
     coin: str
     price: float
-    rsi: float | None = None
-    macd: float | None = None
-    macd_signal: float | None = None
-    ema12: float | None = None
-    ema26: float | None = None
-    volume_change: float | None = None
-    bb_upper: float | None = None
-    bb_lower: float | None = None
-    fib_levels: dict | None = None
-    news_summary: str | None = None
-    market_rank_data: dict | None = None
+    rsi: Optional[float] = None
+    macd: Optional[float] = None
+    macd_signal: Optional[float] = None
+    ema12: Optional[float] = None
+    ema26: Optional[float] = None
+    volume_change: Optional[float] = None
+    bb_upper: Optional[float] = None
+    bb_lower: Optional[float] = None
+    fib_levels: Optional[dict] = None
+    news_summary: Optional[str] = None
+    market_rank_data: Optional[dict] = None
 
 
 class ChatRequest(BaseModel):
     message: str
-    context: str | None = None
+    context: Optional[str] = None
 
 
 @app.get("/health")
